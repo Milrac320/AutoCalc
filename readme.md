@@ -15,8 +15,8 @@ Siga as instruções abaixo para utilizar o programa com eficiência.
 - Microsoft Excel para manipulação de arquivos xlsm
 
 - Bibliotecas Python instaladas conforme arquivo pjecalc_bibliotecas.py
-- pip install psutil PyQt5 xlrd pandas openpyxl selenium webdriver-manager
-
+  
+`pip install psutil PyQt5 xlrd pandas openpyxl selenium webdriver-manager`
 
 ## Instruções de Uso
 
