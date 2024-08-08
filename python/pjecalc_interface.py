@@ -298,7 +298,7 @@ class PjeCalcAutomatizacao(QMainWindow):
             self.avisos.setText('Iniciando Pje-Calc')  
             
             # Iniciar o processo do PjeCalc
-            subprocess.Popen(caminho_arquivo_bat, shell=False)
+            subprocess.Popen(caminho_arquivo_bat, shell=True)
 
             # Aguardar o início dos processos javaw.exe e firefox.exe
             self.aguardar_inicio_programa(nome_processo_javaw)
