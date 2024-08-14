@@ -477,15 +477,17 @@ def calculo():
         
         tempo_espera('alteração')
         
-        (lambda:(
-            navegador.find_element(*xpath_custas_devido).click()
-        )if custas in valores_nao_apurar_custas else (
-            navegador.find_element(*xpath_ativar_custas).click(),
-            tempo_espera('alteração'),
-            navegador.find_element(*xpath_data_custas).click(),
-            tempo_espera('alteração'),
-            navegador.find_element(*xpath_data_custas).send_keys(vencimento_custas),
-            navegador.find_element(*xpath_valor_custas).send_keys(criarDecimal(valor_custas))))()
+        # (lambda:(
+        #     navegador.find_element(*xpath_custas_devido).click()
+        # )if custas in valores_nao_apurar_custas else (
+        #     navegador.find_element(*xpath_ativar_custas).click(),
+        #     tempo_espera('alteração'),
+        #     navegador.find_element(*xpath_data_custas).click(),
+        #     tempo_espera('alteração'),
+        #     navegador.find_element(*xpath_data_custas).send_keys(vencimento_custas),
+        #     navegador.find_element(*xpath_valor_custas).send_keys(criarDecimal(valor_custas))))()
+        
+
 
         navegador.find_element(*xpath_salvar).click()
         
@@ -1134,7 +1136,11 @@ def calculo():
 # SALVAMENTO
 
     tempo_espera('salvar')
-    navegador.find_element(*xpath_menu_exportar).click()
+    try:
+        navegador.find_element(*xpath_menu_exportar).click()
+    except NoSuchElementException:
+        tempo_espera('salvar')
+        navegador.find_element(*xpath_menu_exportar).click()
     tempo_espera('salvar')
     navegador.find_element(*xpath_aba_exportar).click()
     tempo_espera('salvar')        

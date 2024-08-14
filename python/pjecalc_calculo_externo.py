@@ -164,7 +164,11 @@ def calculoExterno():
 # SALVAMENTO        
 
     tempo_espera('salvar')
-    navegador.find_element(*xpath_menu_exportar).click()
+    try:
+        navegador.find_element(*xpath_menu_exportar).click()
+    except NoSuchElementException:
+        tempo_espera('salvar')
+        navegador.find_element(*xpath_menu_exportar).click()
     tempo_espera('salvar')
     navegador.find_element(*xpath_aba_exportar).click()
     tempo_espera('salvar')        
