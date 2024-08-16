@@ -2,6 +2,7 @@ from pjecalc_bibliotecas import *
 from pjecalc_funcoes import *
 from pjecalc_calculo import calculo
 from pjecalc_calculo_externo import calculoExterno
+from pjecalc_design import *
 
 warnings.filterwarnings('ignore', category=UserWarning, module='pandas')
 
@@ -17,80 +18,6 @@ class PjeCalcAutomatizacao(QMainWindow):
     def initUI(self):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-
-        style1 = '''
-            QCheckBox::indicator {
-                width: 12px;
-                height: 12px;
-                border: 0.5px solid black;
-                border-radius: 2px;
-            }
-
-            QCheckBox {
-                font-family: 'Josefin Sans Bold';  /* Use o nome real da fonte, não o caminho do arquivo */
-                font-size: 13px;
-                color: black;
-            }
-
-            QCheckBox::indicator:unchecked {
-                background: black;
-            }
-
-            QCheckBox::indicator:checked {
-                background: #6cff5c;
-            }
-
-            QLineEdit{
-                color:white;
-                font-size: 11px;
-                height: 100px;
-            }
-
-                '''
-        
-        style2 = '''
-            QCheckBox::indicator {
-                width: 15px;
-                height: 15px;
-                border: 0.5px solid white;
-                border-radius: 2px;
-            }
-
-            QCheckBox {
-                font-family: 'Josefin Sans Bold';  /* Use o nome real da fonte, não o caminho do arquivo */
-                font-size: 16px;
-                color: white;
-            }
-
-            QCheckBox::indicator:unchecked {
-                background: white;
-            }
-
-            QCheckBox::indicator:checked {
-                background: #6cff5c;
-            }
-
-            QLabel{
-                color: white;
-                font-size: 16px;
-                font-family: 'Josefin Sans Bold';
-            }
-
-            QPushButton{
-                font-family: 'Josefin Sans Bold';
-                font-size: 20px;
-                color: black;
-                background: white;
-                border: 2px solid white;
-                border-radius: 4px;
-                padding: 5px;
-            }
-
-            QLineEdit{
-                color:white;
-                font-size: 11px;
-            }
-                '''        
 
         layout = QVBoxLayout(central_widget)
 
@@ -144,6 +71,7 @@ class PjeCalcAutomatizacao(QMainWindow):
             checkbox.setStyleSheet(style1)
             self.checkboxes.append(checkbox)
             quadro1_layout.addWidget(checkbox)
+            checkbox.setCursor(Qt.PointingHandCursor)
 
         # Defina a altura do Quadro 1
         quadro1.setFixedHeight(435)  # Ajuste a altura conforme necessário
@@ -162,16 +90,19 @@ class PjeCalcAutomatizacao(QMainWindow):
         checkbox2_1 = QCheckBox('CÁLCULO')
         checkbox2_1.clicked.connect(lambda: self.toggle_checkboxes(self.checkbox2_1))
         checkbox2_1.setStyleSheet(style2)
+        checkbox2_1.setCursor(Qt.PointingHandCursor)
         self.checkbox2_1 = checkbox2_1
 
         checkbox2_2 = QCheckBox('CÁLCULO EXTERNO')
         checkbox2_2.clicked.connect(lambda: self.toggle_checkboxes(checkbox2_2))
         checkbox2_2.setStyleSheet(style2)
+        checkbox2_2.setCursor(Qt.PointingHandCursor)
         self.checkbox2_2 = checkbox2_2
 
         checkbox2_3 = QCheckBox('TESTE DE VARIÁVEIS')
         checkbox2_3.clicked.connect(lambda: self.toggle_checkboxes(checkbox2_3))
         checkbox2_3.setStyleSheet(style2)
+        checkbox2_3.setCursor(Qt.PointingHandCursor)
         self.checkbox2_3 = checkbox2_3
 
         linha2_1 = QFrame()
@@ -190,9 +121,10 @@ class PjeCalcAutomatizacao(QMainWindow):
         label_quadro2 = QLabel('ESCOLHA O ARQUIVO:')
         label_quadro2.setStyleSheet(style2)
 
-        self.nome_arquivo_edit = QLineEdit('Nenhum arquivo selecionado! Clique Aqui.')
+        self.nome_arquivo_edit = QLineEdit(' Nenhum arquivo selecionado! Clique Aqui.')
         self.nome_arquivo_edit.setStyleSheet(style2)
         self.nome_arquivo_edit.setReadOnly(True)
+        self.nome_arquivo_edit.setCursor(Qt.PointingHandCursor)
         self.nome_arquivo_edit.mousePressEvent = self.salvar_diretorio_json
 
         linha2_3 = QFrame()
@@ -202,11 +134,13 @@ class PjeCalcAutomatizacao(QMainWindow):
         self.avisos = QLineEdit()
         self.avisos.setStyleSheet(style1)  
         self.avisos.setAlignment(Qt.AlignCenter)
+        self.avisos.setReadOnly(True)
 
         botao_executar = QPushButton('EXECUTAR')
         botao_executar.clicked.connect(self.iniciar_pjecalc)  # Conecta o botão à função executar
         botao_executar.setStyleSheet(style2)
-
+        botao_executar.setCursor(Qt.PointingHandCursor)
+        
         quadro2_layout.addSpacing(5)
         quadro2_layout.addWidget(titulo2)
         quadro2_layout.addSpacing(5)  # Adicione o espaçamento desejado
@@ -349,9 +283,9 @@ class PjeCalcAutomatizacao(QMainWindow):
 
     def chamar_calculo(self):
         if not self.checkbox2_1.isChecked() and not self.checkbox2_2.isChecked() and not self.checkbox2_3.isChecked():
-            self.avisos.setText('Selecione o tipo de Cálculo')  
+            self.avisos.setText('Selecione o tipo de Cálculo!')  
         elif self.nome_arquivo_edit.text() == 'Nenhum arquivo selecionado! Clique aqui.':
-            self.avisos.setText('Selecione o arquivo')
+            self.avisos.setText('Selecione o arquivo!')
         elif self.checkbox2_1.isChecked():
             self.avisos.clear()
             calculo()

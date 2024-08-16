@@ -6,9 +6,9 @@ import psutil
 from decimal import Decimal
 import time
 import subprocess
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QFrame, QHBoxLayout, QPushButton, QCheckBox, QFileDialog, QLineEdit, QMessageBox, QDesktopWidget
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont, QScreen
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QFrame, QHBoxLayout, QPushButton, QCheckBox, QFileDialog, QLineEdit, QMessageBox, QDesktopWidget, QGraphicsDropShadowEffect
+from PyQt5.QtCore import Qt, QPropertyAnimation, QRect, QEasingCurve
+from PyQt5.QtGui import QFont, QScreen, QCursor, QColor
 import warnings
 import datetime
 import xlrd
