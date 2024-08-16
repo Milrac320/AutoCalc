@@ -168,6 +168,7 @@ def calculo():
         
         vencimento_juros_primeiro_adv_recte = converter_data(src(df_analise_geral,txt_vencimento_juros_primeiro_adv_recte ,0,1),'dmy')
                
+               
 # HONORÁRIOS 1º ADV. RECDA.
         
     def var_honorarios_1_adv_recda():   
@@ -477,18 +478,16 @@ def calculo():
         
         tempo_espera('alteração')
         
-        # (lambda:(
-        #     navegador.find_element(*xpath_custas_devido).click()
-        # )if custas in valores_nao_apurar_custas else (
-        #     navegador.find_element(*xpath_ativar_custas).click(),
-        #     tempo_espera('alteração'),
-        #     navegador.find_element(*xpath_data_custas).click(),
-        #     tempo_espera('alteração'),
-        #     navegador.find_element(*xpath_data_custas).send_keys(vencimento_custas),
-        #     navegador.find_element(*xpath_valor_custas).send_keys(criarDecimal(valor_custas))))()
+        (lambda:(
+            navegador.find_element(*xpath_ativar_custas).click(),
+            tempo_espera('alteração'),
+            navegador.find_element(*xpath_data_custas).click(),
+            tempo_espera('alteração'),
+            navegador.find_element(*xpath_data_custas).send_keys(vencimento_custas),
+            navegador.find_element(*xpath_valor_custas).send_keys(criarDecimal(valor_custas))
+        )if valor_monetario(custas) else (
+            navegador.find_element(*xpath_custas_devido).click()))()
         
-
-
         navegador.find_element(*xpath_salvar).click()
         
         tempo_espera('alteração')
@@ -510,7 +509,7 @@ def calculo():
     
 # HONORÁRIOS 1º ADV. RECTE.
 
-        if primeiro_adv_recte is not None and adv_recte is not None:
+        if primeiro_adv_recte is not None and adv_recte is not None and valor_primeiro_adv_recte != "INDEVIDO":
 
             navegador.find_element(*xpath_novo_honorario).click()
         
@@ -542,7 +541,7 @@ def calculo():
         
             elif tipo_primeiro_adv_recte == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_primeiro_adv_recte) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_primeiro_adv_recte) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
 
@@ -558,7 +557,7 @@ def calculo():
 
 # HONORÁRIOS 1º ADV. RECDA.
             
-        if (primeira_adv_recda or adv_recda is not None) and not (exigibilidade_primeira_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO'):
+        if (primeira_adv_recda is not None or adv_recda is not None) and not (exigibilidade_primeira_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO') and valor_primeira_adv_recda != "INDEVIDO":
 
             tempo_espera('alteração')
         
@@ -602,7 +601,7 @@ def calculo():
         
             elif tipo_primeira_adv_recda == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_primeira_adv_recda) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_primeira_adv_recda) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
         
@@ -616,7 +615,7 @@ def calculo():
     
 # HONORÁRIOS 2º ADV. RECDA.
             
-        if (segunda_adv_recda or adv_recda_2 is not None) and not (exigibilidade_segunda_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO'):
+        if (segunda_adv_recda is not None or adv_recda_2 is not None) and not (exigibilidade_segunda_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO') and valor_segunda_adv_recda != "INDEVIDO":
         
             tempo_espera('alteração')
         
@@ -660,7 +659,7 @@ def calculo():
         
             elif tipo_segunda_adv_recda == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_segunda_adv_recda) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_segunda_adv_recda) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
         
@@ -674,7 +673,7 @@ def calculo():
             
 # HONORÁRIOS 3º ADV. RECDA.
             
-        if (terceira_adv_recda or adv_recda_3 is not None) and not (exigibilidade_terceira_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO'):
+        if (terceira_adv_recda is not None or adv_recda_3 is not None) and not (exigibilidade_terceira_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO') and valor_terceira_adv_recda != "INDEVIDO":
         
             tempo_espera('alteração')
         
@@ -732,7 +731,7 @@ def calculo():
 
 # HONORÁRIOS 4º ADV. RECDA.
             
-        if (quarta_adv_recda or adv_recda_4 is not None) and not (exigibilidade_quarta_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO'):
+        if (quarta_adv_recda is not None or adv_recda_4 is not None) and not (exigibilidade_quarta_adv_recda == 'SUSPENSA' and municipio == 'RIBEIRAO PRETO') and valor_quarta_adv_recda != "INDEVIDO":
             
             tempo_espera('alteração')
         
@@ -778,7 +777,7 @@ def calculo():
         
             elif tipo_quarta_adv_recda == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_quarta_adv_recda) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_quarta_adv_recda) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
         
@@ -822,7 +821,7 @@ def calculo():
         
             elif tipo_perito_contabil == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_perito_contabil) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_perito_contabil) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
         
@@ -836,7 +835,7 @@ def calculo():
 
 # HONORÁRIOS ENGENHEIRO
         
-        if engenheiro is not None:
+        if engenheiro is not None and (valor_engenheiro != "INDEVIDO" and valor_engenheiro != "JUSTIÇA GRATUITA"):
 
             var_honorarios_engenheiro()
         
@@ -866,7 +865,7 @@ def calculo():
         
             elif tipo_engenheiro == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_engenheiro) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_engenheiro) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
         
@@ -880,7 +879,7 @@ def calculo():
 
 # HONORÁRIOS MÉDICO
             
-        if medico is not None:
+        if medico is not None and (valor_medico != "INDEVIDO" and valor_medico != "JUSTIÇA GRATUITA"):
                    
             var_honorarios_medico()
 
@@ -910,7 +909,7 @@ def calculo():
         
             elif tipo_medico == 'CALCULADO':
         
-                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_medico) * Decimal('1000')))
+                navegador.find_element(*xpath_aliquota_honorario).send_keys(str(Decimal(valor_medico) * Decimal('100')))
         
                 lista_suspensa = Select(navegador.find_element(*xpath_base_honorario))
         

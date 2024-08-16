@@ -292,7 +292,7 @@ txt_vencimento_juros_quarta_adv_recda=txt_ajuizamento
 # HONORÁRIOS PERITO CONTÁBIL
 
 apurar_honorario_perito = None
-txt_apurar_honorario_perito =['HONORÁRIOS C O N T A D O R ?']
+txt_apurar_honorario_perito =['HONORÁRIOS C O N T A D O R ?','HONORÁRIOS                         C O N T A D O R ?']
 
 perito_contabil= None
 txt_perito_contabil=['IGOR DE MARCHI SOARES']

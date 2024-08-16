@@ -296,3 +296,10 @@ def testeDeVariaveis():
 
     # Abrir o arquivo de texto em um terminal separado
     subprocess.run(['cmd', '/c', 'start', 'txt/variaveis.txt'], shell=True)
+
+# VERIFICAR CUSTAS
+
+def valor_monetario(value):
+
+    padrao_monetario = r'^\s*(R\$|\$)?\s*\d{1,3}(\.\d{3})*(\d{1,3})?(,\d{2})?\s*$'
+    return bool(re.match(padrao_monetario, str(value)))
