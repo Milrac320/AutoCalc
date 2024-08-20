@@ -64,8 +64,8 @@ txt_estado =['SP']
 
 municipio = None
 txt_municipio =['PROCESSO Nº:']
-municipio_ribeirao_preto = ['0066','0067','0113','0004']
-municipio_franca=['0015']
+municipio_ribeirao_preto = ['0066','0067','0113','0004','0042','0153']
+municipio_franca=['0015','0076']
 
 admissao=None
 txt_admissao=['ADMISSÃO:']
