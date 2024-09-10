@@ -168,7 +168,25 @@ xpath_juros_honorario=(By.XPATH,'//*[@id="formulario:aplicarJuros"]')
 
 xpath_data_juros_honorario=(By.XPATH,'//*[@id="formulario:dataJurosAPartirDeInputDate"]')
 
+# MULTAS E INDENIZAÇÕES
+
 xpath_aba_multas=(By.XPATH,'//*[@id="formulario:j_id38:0:j_id41:19:j_id46"]')
+
+xpath_button_nova_multa= (By.XPATH,'//*[@id="formulario:incluir"]')
+
+xpath_input_descricao_multa = (By.XPATH,'//*[@id="formulario:descricao"]')
+
+xpath_checkbox_valor_informado = (By.XPATH,'//*[@id="formulario:valor:0"]')
+
+xpath_checkbox_valor_calculado = (By.XPATH,'//*[@id="formulario:valor:1"]')
+
+xpath_select_base = (By.XPATH,'//*[@id="formulario:tipoBaseMulta"]')
+
+xpath_input_aliquota_multa = (By.XPATH,'//*[@id="formulario:aliquota"]')
+
+xpath_select_credor_devedor = (By.XPATH,'//*[@id="formulario:credorDevedor"]')
+
+# 
 
 xpath_aba_ir=(By.XPATH,'//*[@id="formulario:j_id38:0:j_id41:18:j_id46"]')
 

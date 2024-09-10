@@ -84,11 +84,13 @@ def calculoExterno():
 
     navegador.find_element(*xpath_menu_painel).click()
 
+    inserirDadosClick(navegador, xpath_menu_painel, 1)
+
     tempo_espera('alteração')
 
     limpar()
 
-    navegador.find_element(*xpath_aba_calculo_externo).click()
+    inserirDadosClick(navegador, xpath_aba_calculo_externo, 1)
 
     tempo_espera('alteração')
 
@@ -108,27 +110,31 @@ def calculoExterno():
 
     navegador.find_element(*xpath_reclamante).send_keys(recte)
 
-    navegador.find_element(*xpath_selecionar_cpf).click()
-    navegador.find_element(*xpath_ativar_cpf).click()
+    inserirDadosClick(navegador, xpath_selecionar_cpf, 1)
+
+    inserirDadosClick(navegador, xpath_ativar_cpf, 1)
+
     navegador.find_element(*xpath_cpf).send_keys(cpf)
 
     (lambda:(
         navegador.find_element(*xpath_adv_recte).send_keys(adv_recte),
-        navegador.find_element(*xpath_enviar_adv_recte).click()
+        inserirDadosClick(navegador, xpath_enviar_adv_recte, 1)
     )if adv_recte != None else None)()
 
     navegador.find_element(*xpath_reclamada).send_keys(recda)
 
-    navegador.find_element(*xpath_selecionar_cnpj).click()
-    navegador.find_element(*xpath_cnpj).click()
+    inserirDadosClick(navegador, xpath_selecionar_cnpj, 1)
+
+    inserirDadosClick(navegador, xpath_cnpj, 1)
+
     navegador.find_element(*xpath_cnpj).send_keys(cnpj)
 
     (lambda:(
         navegador.find_element(*xpath_adv_recda).send_keys(adv_recda),
-        navegador.find_element(*xpath_enviar_adv_recda).click()
+        inserirDadosClick(navegador, xpath_enviar_adv_recda, 1)
     )if adv_recda != None else None)()
 
-    navegador.find_element(*xpath_aba_parametros).click()
+    inserirDadosClick(navegador, xpath_aba_parametros, 1)
 
     tempo_espera('alteração')
 
@@ -136,22 +142,23 @@ def calculoExterno():
 
     varParamentrosCalcExt()
 
-    navegador.find_element(*xpath_ativar_ultima_atualizacao).click()
+    inserirDadosClick(navegador, xpath_ativar_ultima_atualizacao, 1)
+
     navegador.find_element(*xpath_ultima_atualizacao).send_keys(ultima_atualizacao)
 
     navegador.find_element(*xpath_indice_trabalhista).send_keys(indice_trabalhista) if segundo_indice_trabalhista == vazio else navegador.find_element(*xpath_indice_trabalhista).send_keys(segundo_indice_trabalhista)
 
-    navegador.find_element(*xpath_taxa_negativa).click() if taxa_negativa == 'SIM' else None
+    inserirDadosClick(navegador, xpath_taxa_negativa, 1) if taxa_negativa == 'SIM' else None
 
     lista_suspensa = Select(navegador.find_element(*xpath_base_juros))
 
     lista_suspensa.select_by_index(base_juros)
 
-    navegador.find_element(*xpath_fgts_sim).click() if fgts == 'PAGAR' else (navegador.find_element(*xpath_fgts_nao).click() if fgts == 'RECOLHER' else None)
+    inserirDadosClick(navegador, xpath_fgts_sim, 1) if taxa_negativa == 'SIM' else None if fgts == 'PAGAR' else (inserirDadosClick(navegador, xpath_fgts_nao, 1) if fgts == 'RECOLHER' else None)
 
     navegador.find_element(*xpath_tabela_juros).send_keys(tabela_juros) if segunda_tabela_juros == vazio else navegador.find_element(*xpath_tabela_juros).send_keys(segunda_tabela_juros)
 
-    navegador.find_element(*xpath_inss).click() if inss == 'NÃO' else None
+    inserirDadosClick(navegador, xpath_inss, 1) if inss == 'NÃO' else None
 
     navegador.find_element(*xpath_meses_ir).send_keys(meses_ir)
 

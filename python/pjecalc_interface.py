@@ -190,7 +190,7 @@ class PjeCalcAutomatizacao(QMainWindow):
                 # Marque a checkbox2_4
                 checkbox2_4.setChecked(True)
                 return
-
+            
     def encerrar_processo(self, nome_processo):  # Adicione o argumento self
         for processo in psutil.process_iter(attrs=['pid', 'name']):
             if nome_processo.lower() in processo.info['name'].lower():

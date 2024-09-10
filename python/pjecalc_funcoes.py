@@ -303,3 +303,13 @@ def valor_monetario(value):
 
     padrao_monetario = r'^\s*(R\$|\$)?\s*\d{1,3}(\.\d{3})*(\d{1,3})?(,\d{2})?\s*$'
     return bool(re.match(padrao_monetario, str(value)))
+
+# TRY EXCEPT ACESSAR ELEMENTO
+
+def inserirDadosClick(navegador, localizador, tempo):
+    try:
+        navegador.find_element(*localizador).click()
+    except NoSuchElementException:
+        time.sleep(tempo)
+        navegador.find_element(*localizador).click()    
+
