@@ -134,13 +134,10 @@ def iniciar_planilhas():
         file_path = processo
 
         if file_path and os.path.exists(file_path):
-            df_analise_geral = pd.read_excel(file_path, engine='openpyxl', header=None, sheet_name='ANÁLISE GERAL', dtype=str)
-            df_analise_geral = df_analise_geral.apply(lambda col: col.map(lambda x: None if pd.isna(x) else x))
+            df_pjecalc = pd.read_excel(file_path, engine='openpyxl', header=None, sheet_name='PJECALC', dtype=str)
+            df_pjecalc = df_pjecalc.apply(lambda col: col.map(lambda x: None if pd.isna(x) else x))
 
-            df_analise_decisoes = pd.read_excel(file_path, engine='openpyxl', header=None, sheet_name='ANÁLISE DECISÕES 2024', dtype=str)
-            df_analise_decisoes = df_analise_decisoes.apply(lambda col: col.map(lambda x: None if pd.isna(x) else x))
-
-            return df_analise_geral, df_analise_decisoes, data
+            return df_pjecalc, data
         else:
             print('O arquivo especificado não foi encontrado.')
             return None, None, None
@@ -151,115 +148,115 @@ def iniciar_planilhas():
 # TESTE DE VARIAVEIS NAS PLANILHAS
     
 def testeDeVariaveis():
-    df_analise_geral, df_analise_decisoes, _ = iniciar_planilhas()
+    df_pjecalc, df_pjecalc, _ = iniciar_planilhas()
 
     variaveis = [
         ('','''------------------------------------
         DADOS DO PROCESSO
         ------------------------------------'''),
-        ('SEQUENCIA | ', src(df_analise_geral,txt_sequencia,0,1)[0:7]),
-        ('DIGITO | ', src(df_analise_geral,txt_digito,0,1)[8:10]),
-        ('ANO | ', src(df_analise_geral,txt_ano,0,1)[11:15]),
-        ('TRIBUNAL | ', src(df_analise_geral,txt_tribunal,0,1)[18:20]),
-        ('VARA | ', src(df_analise_geral,txt_vara,0,1)[21:25]),
-        ('RECTE | ', src(df_analise_geral,txt_recte,0,1)),
-        ('CPF | ', src(df_analise_geral,txt_cpf,0,3)),
-        ('ADV_RECTE | ', src(df_analise_geral,txt_adv_recte,0,1)),
-        ('RECDA | ', src(df_analise_geral,txt_recda,1,1)),
-        ('CNPJ | ', src(df_analise_geral,txt_cnpj,1,3)),
-        ('ADV_RECDA | ', src(df_analise_geral,txt_adv_recda,1,1)),
+        ('SEQUENCIA | ', src(df_pjecalc,txt_sequencia,0,1)[0:7]),
+        ('DIGITO | ', src(df_pjecalc,txt_digito,0,1)[8:10]),
+        ('ANO | ', src(df_pjecalc,txt_ano,0,1)[11:15]),
+        ('TRIBUNAL | ', src(df_pjecalc,txt_tribunal,0,1)[18:20]),
+        ('VARA | ', src(df_pjecalc,txt_vara,0,1)[21:25]),
+        ('RECTE | ', src(df_pjecalc,txt_recte,0,1)),
+        ('CPF | ', src(df_pjecalc,txt_cpf,0,3)),
+        ('ADV_RECTE | ', src(df_pjecalc,txt_adv_recte,0,1)),
+        ('RECDA | ', src(df_pjecalc,txt_recda,1,1)),
+        ('CNPJ | ', src(df_pjecalc,txt_cnpj,1,3)),
+        ('ADV_RECDA | ', src(df_pjecalc,txt_adv_recda,1,1)),
         ('', '''------------------------------------
         PARÂMETROS DO CÁLCULO
         ------------------------------------'''),
         ('ESTADO | ', 'SP'),
-        ('MUNICIPIO | ', src(df_analise_geral,txt_municipio,0,1)[21:25]),
-        ('ADMISSAO | ', converter_data(src(df_analise_geral,txt_admissao,0,1),'dmy')),
-        ('DEMISSAO | ', converter_data(src(df_analise_geral,txt_demissao,0,1),'dmy')),
-        ('AJUIZAMENTO | ', converter_data(src(df_analise_geral,txt_ajuizamento,0,1),'dmy')),
-        ('DATA_INICIAL | ', converter_data(src(df_analise_geral,txt_data_inicial,0,1),'dmy')),
-        ('DATA_FINAL | ', converter_data(src(df_analise_geral,txt_data_final,0,1),'dmy')),
-        ('PRESCRICAO | ', src(df_analise_geral,txt_prescricao,0,1)),
-        ('PRAZO_AVISO | ', src(df_analise_geral,txt_prazo_aviso,0,1)),
-        ('OJ415 | ', src(df_analise_decisoes,txt_oj415,0,1)),
-        ('CARGA_HORARIA | ', src(df_analise_decisoes,txt_carga_horaria,0,1)),
-        ('MAIOR_REMUNERACAO | ', src(df_analise_decisoes,txt_maior_remuneracao,0,1)),
-        ('ULTIMA_REMUNERACAO | ', src(df_analise_decisoes,txt_ultima_remuneracao,0,1)),
+        ('MUNICIPIO | ', src(df_pjecalc,txt_municipio,0,1)[21:25]),
+        ('ADMISSAO | ', converter_data(src(df_pjecalc,txt_admissao,0,1),'dmy')),
+        ('DEMISSAO | ', converter_data(src(df_pjecalc,txt_demissao,0,1),'dmy')),
+        ('AJUIZAMENTO | ', converter_data(src(df_pjecalc,txt_ajuizamento,0,1),'dmy')),
+        ('DATA_INICIAL | ', converter_data(src(df_pjecalc,txt_data_inicial,0,1),'dmy')),
+        ('DATA_FINAL | ', converter_data(src(df_pjecalc,txt_data_final,0,1),'dmy')),
+        ('PRESCRICAO | ', src(df_pjecalc,txt_prescricao,0,1)),
+        ('PRAZO_AVISO | ', src(df_pjecalc,txt_prazo_aviso,0,1)),
+        ('OJ415 | ', src(df_pjecalc,txt_oj415,0,1)),
+        ('CARGA_HORARIA | ', src(df_pjecalc,txt_carga_horaria,0,1)),
+        ('MAIOR_REMUNERACAO | ', src(df_pjecalc,txt_maior_remuneracao,0,1)),
+        ('ULTIMA_REMUNERACAO | ', src(df_pjecalc,txt_ultima_remuneracao,0,1)),
         ('', '''------------------------------------
         CORREÇÃO, JUROS E MULTA
         ------------------------------------'''),
-        ('INDICE_TRABALHISTA | ', src(df_analise_decisoes,txt_indice_trabalhista ,0,1)),
-        ('SEGUNDO_INDICE_TRABALHISTA | ', src(df_analise_decisoes, txt_segundo_indice_trabalhista,0,4)),
-        ('DATA_INDICE | ', converter_data(src(df_analise_decisoes, txt_data_indice,0,3),'dmy')),
-        ('TABELA_JUROS | ', src(df_analise_decisoes,txt_tabela_juros ,0,1)),
-        ('SEGUNDA_TABELA_JUROS | ', src(df_analise_decisoes, txt_segunda_tabela_juros,0,4)),
-        ('DATA_JUROS | ', converter_data(src(df_analise_decisoes, txt_data_juros,0,3),'dmy')),
+        ('INDICE_TRABALHISTA | ', src(df_pjecalc,txt_indice_trabalhista ,0,1)),
+        ('SEGUNDO_INDICE_TRABALHISTA | ', src(df_pjecalc, txt_segundo_indice_trabalhista,0,4)),
+        ('DATA_INDICE | ', converter_data(src(df_pjecalc, txt_data_indice,0,3),'dmy')),
+        ('TABELA_JUROS | ', src(df_pjecalc,txt_tabela_juros ,0,1)),
+        ('SEGUNDA_TABELA_JUROS | ', src(df_pjecalc, txt_segunda_tabela_juros,0,4)),
+        ('DATA_JUROS | ', converter_data(src(df_pjecalc, txt_data_juros,0,3),'dmy')),
         ('TAXA_NEGATIVA | ', txt_taxa_negativa),
-        ('PRE_JUROS | ', src(df_analise_decisoes, txt_pre_juros,1,0)),
-        ('BASE_JUROS | ', src(df_analise_decisoes, txt_base_juros,1,0) ),
-        ('INSS | ', src(df_analise_decisoes, txt_inss,1,0)),
+        ('PRE_JUROS | ', src(df_pjecalc, txt_pre_juros,1,0)),
+        ('BASE_JUROS | ', src(df_pjecalc, txt_base_juros,1,0) ),
+        ('INSS | ', src(df_pjecalc, txt_inss,1,0)),
         ('', '''------------------------------------
         CUSTAS JUDICIAIS
         ------------------------------------'''),
-        ('CUSTAS | ', src(df_analise_decisoes, txt_custas,1,0)),
-        ('VENCIMENTO_CUSTAS | ', converter_data(src(df_analise_decisoes, txt_vencimento_custas,0,3),'dmy')),
-        ('VALOR_CUSTAS | ', src(df_analise_decisoes, txt_valor_custas,1,0)),
+        ('CUSTAS | ', src(df_pjecalc, txt_custas,1,0)),
+        ('VENCIMENTO_CUSTAS | ', converter_data(src(df_pjecalc, txt_vencimento_custas,0,3),'dmy')),
+        ('VALOR_CUSTAS | ', src(df_pjecalc, txt_valor_custas,1,0)),
         ('', '''------------------------------------
         CONTRIBUIÇÃO SOCIAL
         ------------------------------------'''),
-        ('CORRECAO_TRABALHISTA | ', src(df_analise_decisoes,txt_correcao_trabalhista ,1,0)),
-        ('ATIVIDADE_ECONOMICA | ', src(df_analise_geral,txt_atividade_economica ,0,1)),
-        ('DATA_INICIAL_INSS | ', converter_data(src(df_analise_geral,txt_data_inicial_inss ,0,1),'dmy')),
-        ('DATA_FINAL_INSS | ', converter_data(src(df_analise_geral, txt_data_final_inss,0,1),'dmy')),
-        ('SIMPLES_NACIONAL | ', src(df_analise_geral, txt_simples_nacional,0,1)),
-        ('INICIO_NACIONAL | ', converter_data(src(df_analise_geral, txt_inicio_nacional,0,1),'my')),
-        ('FINAL_NACIONAL | ', converter_data(src(df_analise_geral, txt_final_nacional,0,1),'my')),
+        ('CORRECAO_TRABALHISTA | ', src(df_pjecalc,txt_correcao_trabalhista ,1,0)),
+        ('ATIVIDADE_ECONOMICA | ', src(df_pjecalc,txt_atividade_economica ,0,1)),
+        ('DATA_INICIAL_INSS | ', converter_data(src(df_pjecalc,txt_data_inicial_inss ,0,1),'dmy')),
+        ('DATA_FINAL_INSS | ', converter_data(src(df_pjecalc, txt_data_final_inss,0,1),'dmy')),
+        ('SIMPLES_NACIONAL | ', src(df_pjecalc, txt_simples_nacional,0,1)),
+        ('INICIO_NACIONAL | ', converter_data(src(df_pjecalc, txt_inicio_nacional,0,1),'my')),
+        ('FINAL_NACIONAL | ', converter_data(src(df_pjecalc, txt_final_nacional,0,1),'my')),
         ('', '''------------------------------------
         FGTS
         ------------------------------------'''),
-        ('FGTS | ', src(df_analise_decisoes,txt_fgts ,1,0)),
-        ('MULTA_FGTS | ', src(df_analise_decisoes,txt_multa_fgts ,1,0)),
-        ('MULTA_467 | ', src(df_analise_decisoes,txt_multa_467 ,1,0)),
-        ('INCIDENCIA_FGTS | ', src(df_analise_decisoes,txt_incidencia_fgts ,1,0)),
+        ('FGTS | ', src(df_pjecalc,txt_fgts ,1,0)),
+        ('MULTA_FGTS | ', src(df_pjecalc,txt_multa_fgts ,1,0)),
+        ('MULTA_467 | ', src(df_pjecalc,txt_multa_467 ,1,0)),
+        ('INCIDENCIA_FGTS | ', src(df_pjecalc,txt_incidencia_fgts ,1,0)),
         ('EXCLUIR_BASE_SOBRE_AVISO | ',  txt_excluir_base_sobre_aviso),
         ('', '''------------------------------------
         HONORÁRIOS 1º ADV. RECTE.
         ------------------------------------'''),
-        ('PRIMEIRO_ADV_RECTE | ', f'{src(df_analise_decisoes,txt_primeiro_adv_recte ,1,0)} [ADV.RECTE.]'),
-        ('VENCIMENTO_PRIMEIRO_ADV_RECTE | ', converter_data(src(df_analise_geral, txt_vencimento_primeiro_adv_recte,0,1),'dmy')),
-        ('VALOR_PRIMEIRO_ADV_RECTE | ', src(df_analise_decisoes,txt_valor_primeiro_adv_recte ,1,1)),
-        ('VENCIMENTO_JUROS_PRIMEIRO_ADV_RECTE | ', converter_data(src(df_analise_geral,txt_vencimento_juros_primeiro_adv_recte ,0,1),'dmy')),
+        ('PRIMEIRO_ADV_RECTE | ', f'{src(df_pjecalc,txt_primeiro_adv_recte ,1,0)} [ADV.RECTE.]'),
+        ('VENCIMENTO_PRIMEIRO_ADV_RECTE | ', converter_data(src(df_pjecalc, txt_vencimento_primeiro_adv_recte,0,1),'dmy')),
+        ('VALOR_PRIMEIRO_ADV_RECTE | ', src(df_pjecalc,txt_valor_primeiro_adv_recte ,1,1)),
+        ('VENCIMENTO_JUROS_PRIMEIRO_ADV_RECTE | ', converter_data(src(df_pjecalc,txt_vencimento_juros_primeiro_adv_recte ,0,1),'dmy')),
         ('', '''------------------------------------
         HONORÁRIOS 1º ADV. RECDA.
         ------------------------------------'''),
-        ('PRIMEIRA_ADV_RECDA | ', f'{src(df_analise_decisoes,txt_primeira_adv_recda ,1,0)} [ADV.RECDA.]'),
-        ('VENCIMENTO_PRIMEIRA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_primeira_adv_recda,0,1),'dmy')),
-        ('VALOR_PRIMEIRA_ADV_RECDA | ', src(df_analise_decisoes,txt_valor_primeira_adv_recda ,1,1)),
-        ('EXIGIBILIDADE_PRIMEIRA_ADV_RECDA | ', src(df_analise_decisoes,txt_exigibilidade_primeira_adv_recda ,1,2)),
-        ('VENCIMENTO_JUROS_PRIMEIRA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_juros_primeira_adv_recda,0,1),'dmy')),
+        ('PRIMEIRA_ADV_RECDA | ', f'{src(df_pjecalc,txt_primeira_adv_recda ,1,0)} [ADV.RECDA.]'),
+        ('VENCIMENTO_PRIMEIRA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_primeira_adv_recda,0,1),'dmy')),
+        ('VALOR_PRIMEIRA_ADV_RECDA | ', src(df_pjecalc,txt_valor_primeira_adv_recda ,1,1)),
+        ('EXIGIBILIDADE_PRIMEIRA_ADV_RECDA | ', src(df_pjecalc,txt_exigibilidade_primeira_adv_recda ,1,2)),
+        ('VENCIMENTO_JUROS_PRIMEIRA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_juros_primeira_adv_recda,0,1),'dmy')),
         ('', '''------------------------------------
         HONORÁRIOS 2º ADV. RECDA.
         ------------------------------------'''),
-        ('SEGUNDA_ADV_RECDA | ', f'{src(df_analise_decisoes,txt_segunda_adv_recda ,2,0)} [ADV. 2ª RECDA.]'),
-        ('VENCIMENTO_SEGUNDA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_segunda_adv_recda,0,1),'dmy')),
-        ('VALOR_SEGUNDA_ADV_RECDA | ', src(df_analise_decisoes,txt_valor_segunda_adv_recda ,2,1)),
-        ('EXIGIBILIDADE_SEGUNDA_ADV_RECDA | ', src(df_analise_decisoes,txt_exigibilidade_segunda_adv_recda ,2,2)),
-        ('VENCIMENTO_JUROS_SEGUNDA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_juros_segunda_adv_recda,0,1),'dmy')),
+        ('SEGUNDA_ADV_RECDA | ', f'{src(df_pjecalc,txt_segunda_adv_recda ,2,0)} [ADV. 2ª RECDA.]'),
+        ('VENCIMENTO_SEGUNDA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_segunda_adv_recda,0,1),'dmy')),
+        ('VALOR_SEGUNDA_ADV_RECDA | ', src(df_pjecalc,txt_valor_segunda_adv_recda ,2,1)),
+        ('EXIGIBILIDADE_SEGUNDA_ADV_RECDA | ', src(df_pjecalc,txt_exigibilidade_segunda_adv_recda ,2,2)),
+        ('VENCIMENTO_JUROS_SEGUNDA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_juros_segunda_adv_recda,0,1),'dmy')),
         ('', '''------------------------------------
         HONORÁRIOS 3º ADV. RECDA.
         ------------------------------------'''),
-        ('TERCEIRA_ADV_RECDA | ', f'{src(df_analise_decisoes,txt_terceira_adv_recda ,3,0)} [ADV. 3ª RECDA.]'),
-        ('VENCIMENTO_TERCEIRA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_terceira_adv_recda,0,1),'dmy')),
-        ('VALOR_TERCEIRA_ADV_RECDA | ', src(df_analise_decisoes,txt_valor_terceira_adv_recda ,3,1)),
-        ('EXIGIBILIDADE_TERCEIRA_ADV_RECDA | ', src(df_analise_decisoes,txt_exigibilidade_terceira_adv_recda ,3,2)),
-        ('VENCIMENTO_JUROS_TERCEIRA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_juros_terceira_adv_recda,0,1),'dmy')),
+        ('TERCEIRA_ADV_RECDA | ', f'{src(df_pjecalc,txt_terceira_adv_recda ,3,0)} [ADV. 3ª RECDA.]'),
+        ('VENCIMENTO_TERCEIRA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_terceira_adv_recda,0,1),'dmy')),
+        ('VALOR_TERCEIRA_ADV_RECDA | ', src(df_pjecalc,txt_valor_terceira_adv_recda ,3,1)),
+        ('EXIGIBILIDADE_TERCEIRA_ADV_RECDA | ', src(df_pjecalc,txt_exigibilidade_terceira_adv_recda ,3,2)),
+        ('VENCIMENTO_JUROS_TERCEIRA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_juros_terceira_adv_recda,0,1),'dmy')),
         ('', '''------------------------------------
         HONORÁRIOS 4º ADV. RECDA.
         ------------------------------------'''),
-        ('QUARTA_ADV_RECDA | ', f'{src(df_analise_decisoes,txt_quarta_adv_recda ,4,0)} [ADV. 4ª RECDA.]'),
-        ('VENCIMENTO_QUARTA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_quarta_adv_recda,0,1),'dmy')),
-        ('VALOR_QUARTA_ADV_RECDA | ', src(df_analise_decisoes,txt_valor_quarta_adv_recda ,4,1)),
-        ('EXIGIBILIDADE_QUARTA_ADV_RECDA | ', src(df_analise_decisoes,txt_exigibilidade_quarta_adv_recda ,4,2)),
-        ('VENCIMENTO_JUROS_QUARTA_ADV_RECDA | ', converter_data(src(df_analise_geral, txt_vencimento_juros_quarta_adv_recda,0,1),'dmy')),
+        ('QUARTA_ADV_RECDA | ', f'{src(df_pjecalc,txt_quarta_adv_recda ,4,0)} [ADV. 4ª RECDA.]'),
+        ('VENCIMENTO_QUARTA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_quarta_adv_recda,0,1),'dmy')),
+        ('VALOR_QUARTA_ADV_RECDA | ', src(df_pjecalc,txt_valor_quarta_adv_recda ,4,1)),
+        ('EXIGIBILIDADE_QUARTA_ADV_RECDA | ', src(df_pjecalc,txt_exigibilidade_quarta_adv_recda ,4,2)),
+        ('VENCIMENTO_JUROS_QUARTA_ADV_RECDA | ', converter_data(src(df_pjecalc, txt_vencimento_juros_quarta_adv_recda,0,1),'dmy')),
         ('', '''------------------------------------
         HONORÁRIOS PERITO CONTÁBIL
         ------------------------------------'''),
@@ -269,15 +266,15 @@ def testeDeVariaveis():
         ('', '''------------------------------------
         HONORÁRIOS ENGENHEIRO
         ------------------------------------'''),
-        ('ENGENHEIRO | ', src(df_analise_geral,txt_engenheiro,0,1)),
-        ('VENCIMENTO_ENGENHEIRO | ', converter_data(src(df_analise_decisoes,txt_vencimento_engenheiro ,0,3),'dmy')),
-        ('VALOR_ENGENHEIRO | ', src(df_analise_decisoes,txt_valor_engenheiro ,0,1)),
+        ('ENGENHEIRO | ', src(df_pjecalc,txt_engenheiro,0,1)),
+        ('VENCIMENTO_ENGENHEIRO | ', converter_data(src(df_pjecalc,txt_vencimento_engenheiro ,0,3),'dmy')),
+        ('VALOR_ENGENHEIRO | ', src(df_pjecalc,txt_valor_engenheiro ,0,1)),
         ('', '''------------------------------------
         HONORÁRIOS MÉDICO
         ------------------------------------'''),
-        ('MEDICO | ',  src(df_analise_geral,txt_medico,0,1)),
-        ('VENCIMENTO_MEDICO | ', converter_data(src(df_analise_decisoes,txt_vencimento_medico ,0,3),'dmy')),
-        ('VALOR_MEDICO | ', src(df_analise_decisoes,txt_valor_medico ,0,1)),
+        ('MEDICO | ',  src(df_pjecalc,txt_medico,0,1)),
+        ('VENCIMENTO_MEDICO | ', converter_data(src(df_pjecalc,txt_vencimento_medico ,0,3),'dmy')),
+        ('VALOR_MEDICO | ', src(df_pjecalc,txt_valor_medico ,0,1)),
         ]
 
     for i, (nome_variavel, valor) in enumerate(variaveis):

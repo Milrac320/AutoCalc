@@ -7,44 +7,44 @@ warnings.filterwarnings('ignore', category=UserWarning, module='pandas')
 
 def calculo():
 
-    df_analise_geral, df_analise_decisoes, data = iniciar_planilhas()
+    df_pjecalc, df_pjecalc, data = iniciar_planilhas()
 
 # DADOS DO PROCESSO
         
     def var_dados_do_processo():
         global sequencia, digito, ano, tribunal, vara, recte, cpf, adv_recte, recda, cnpj, adv_recda,engenheiro,medico,adv_recda_2,adv_recda_3,adv_recda_4
 
-        sequencia = src(df_analise_geral,txt_sequencia,0,1)[0:7] # OK
+        sequencia = src(df_pjecalc,txt_sequencia,0,1)[0:7] # OK
 
-        digito = src(df_analise_geral,txt_digito,0,1)[8:10] # OK
+        digito = src(df_pjecalc,txt_digito,0,1)[8:10] # OK
 
-        ano = src(df_analise_geral,txt_ano,0,1)[11:15] # OK
+        ano = src(df_pjecalc,txt_ano,0,1)[11:15] # OK
 
-        tribunal = src(df_analise_geral,txt_tribunal,0,1)[18:20] # OK
+        tribunal = src(df_pjecalc,txt_tribunal,0,1)[18:20] # OK
 
-        vara =src(df_analise_geral,txt_vara,0,1)[21:25] # OK
+        vara =src(df_pjecalc,txt_vara,0,1)[21:25] # OK
 
-        recte = src(df_analise_geral,txt_recte,0,1) # OK
+        recte = src(df_pjecalc,txt_recte,0,1) # OK
 
-        cpf = src(df_analise_geral,txt_cpf,0,3) # OK
+        cpf = src(df_pjecalc,txt_cpf,0,3) # OK
 
-        adv_recte = src(df_analise_geral,txt_adv_recte,0,1) # OK
+        adv_recte = src(df_pjecalc,txt_adv_recte,0,1) # OK
 
-        recda = src(df_analise_geral,txt_recda,1,1) # OK
+        recda = src(df_pjecalc,txt_recda,1,1) # OK
 
-        cnpj = src(df_analise_geral,txt_cnpj,1,3) # OK
+        cnpj = src(df_pjecalc,txt_cnpj,1,3) # OK
 
-        adv_recda = src(df_analise_geral,txt_adv_recda,1,1) # OK
+        adv_recda = src(df_pjecalc,txt_adv_recda,1,1) # OK
 
-        adv_recda_2 = src(df_analise_geral,txt_adv_recda,0,1)
+        adv_recda_2 = src(df_pjecalc,txt_adv_recda,0,1)
 
-        adv_recda_3 = src(df_analise_geral,txt_adv_recda,0,1)
+        adv_recda_3 = src(df_pjecalc,txt_adv_recda,0,1)
 
-        adv_recda_4 = src(df_analise_geral,txt_adv_recda,0,1)
+        adv_recda_4 = src(df_pjecalc,txt_adv_recda,0,1)
 
-        engenheiro = src(df_analise_geral,txt_engenheiro,0,1) # OK
+        engenheiro = src(df_pjecalc,txt_engenheiro,0,1) # OK
 
-        medico = src(df_analise_geral,txt_medico,0,1) # OK
+        medico = src(df_pjecalc,txt_medico,0,1) # OK
 
 # PARÂMETROS DO CÁLCULO
 
@@ -53,103 +53,103 @@ def calculo():
 
         estado = txt_estado # OK
 
-        municipio = src(df_analise_geral,txt_municipio,0,1)[21:25] # OK
+        municipio = src(df_pjecalc,txt_municipio,0,1)[21:25] # OK
         municipio = 'RIBEIRAO PRETO' if municipio in municipio_ribeirao_preto else ('FRANCA' if municipio in municipio_franca else None)
 
-        admissao = converter_data(src(df_analise_geral,txt_admissao,0,1),'dmy') # OK
+        admissao = converter_data(src(df_pjecalc,txt_admissao,0,1),'dmy') # OK
 
-        demissao = converter_data(src(df_analise_geral,txt_demissao,0,1),'dmy') # OK
+        demissao = converter_data(src(df_pjecalc,txt_demissao,0,1),'dmy') # OK
 
-        ajuizamento = converter_data(src(df_analise_geral,txt_ajuizamento,0,1),'dmy') # OK
+        ajuizamento = converter_data(src(df_pjecalc,txt_ajuizamento,0,1),'dmy') # OK
 
-        data_inicial = converter_data(src(df_analise_geral,txt_data_inicial,0,1),'dmy') # OK
+        data_inicial = converter_data(src(df_pjecalc,txt_data_inicial,0,1),'dmy') # OK
 
-        data_final = converter_data(src(df_analise_geral,txt_data_final,0,1),'dmy') # OK
+        data_final = converter_data(src(df_pjecalc,txt_data_final,0,1),'dmy') # OK
 
-        prescricao = converter_data(src(df_analise_geral,txt_prescricao,0,1)) # OK
+        prescricao = converter_data(src(df_pjecalc,txt_prescricao,0,1)) # OK
         prescricao = 'NÃO' if prescricao in nao_apurar_prescricao else 'SIM'
 
-        prazo_aviso = src(df_analise_geral,txt_prazo_aviso,0,1) # OK
+        prazo_aviso = src(df_pjecalc,txt_prazo_aviso,0,1) # OK
         prazo_aviso = 'NÃO APURAR' if prazo_aviso in valores_nao_apurar_prazo_aviso else prazo_aviso == 'APURAR' 
 
-        oj415 = src(df_analise_decisoes,txt_oj415,0,1) # OK
+        oj415 = src(df_pjecalc,txt_oj415,0,1) # OK
 
-        carga_horaria = src(df_analise_decisoes,txt_carga_horaria,0,1) # OK
+        carga_horaria = src(df_pjecalc,txt_carga_horaria,0,1) # OK
 
-        maior_remuneracao = src(df_analise_decisoes,txt_maior_remuneracao,0,1) # OK
+        maior_remuneracao = src(df_pjecalc,txt_maior_remuneracao,0,1) # OK
 
-        ultima_remuneracao = src(df_analise_decisoes,txt_ultima_remuneracao,0,1) # OK
+        ultima_remuneracao = src(df_pjecalc,txt_ultima_remuneracao,0,1) # OK
 
 # CORREÇÃO, JUROS E MULTA
 
     def var_correcao_juros_multa():    
         global indice_trabalhista, segundo_indice_trabalhista, data_indice, tabela_juros, segunda_tabela_juros, data_juros, taxa_negativa, pre_juros, base_juros, inss
 
-        indice_trabalhista = src(df_analise_decisoes,txt_indice_trabalhista ,0,1)
+        indice_trabalhista = src(df_pjecalc,txt_indice_trabalhista ,0,1)
         
-        segundo_indice_trabalhista = src(df_analise_decisoes, txt_segundo_indice_trabalhista,0,4)
+        segundo_indice_trabalhista = src(df_pjecalc, txt_segundo_indice_trabalhista,0,4)
         
-        data_indice = converter_data(src(df_analise_decisoes, txt_data_indice,0,3),'dmy')
+        data_indice = converter_data(src(df_pjecalc, txt_data_indice,0,3),'dmy')
         
-        tabela_juros = src(df_analise_decisoes,txt_tabela_juros ,0,1)
+        tabela_juros = src(df_pjecalc,txt_tabela_juros ,0,1)
         
-        segunda_tabela_juros = src(df_analise_decisoes, txt_segunda_tabela_juros,0,4)
+        segunda_tabela_juros = src(df_pjecalc, txt_segunda_tabela_juros,0,4)
         
-        data_juros = converter_data(src(df_analise_decisoes, txt_data_juros,0,3),'dmy')
+        data_juros = converter_data(src(df_pjecalc, txt_data_juros,0,3),'dmy')
         
         taxa_negativa = txt_taxa_negativa
         
-        pre_juros = src(df_analise_decisoes, txt_pre_juros,1,0)
+        pre_juros = src(df_pjecalc, txt_pre_juros,1,0)
         
-        base_juros = src(df_analise_decisoes, txt_base_juros,1,0) 
+        base_juros = src(df_pjecalc, txt_base_juros,1,0) 
         base_juros = '0' if base_juros == 'Verbas' else ('1' if base_juros == 'Verba (-) Contribuição Social' else None)
         
-        inss = src(df_analise_decisoes, txt_inss,1,0)
+        inss = src(df_pjecalc, txt_inss,1,0)
         
 # CUSTAS JUDICIAIS
 
     def var_custas_judiciais():
         global custas, vencimento_custas, valor_custas, index_base_custas
 
-        custas = src(df_analise_decisoes, txt_custas,1,0)
+        custas = src(df_pjecalc, txt_custas,1,0)
 
         index_base_custas = txt_index_base_custas
 
-        vencimento_custas = converter_data(src(df_analise_decisoes, txt_vencimento_custas,0,3),'dmy')
+        vencimento_custas = converter_data(src(df_pjecalc, txt_vencimento_custas,0,3),'dmy')
 
-        valor_custas = src(df_analise_decisoes, txt_valor_custas,1,0)
+        valor_custas = src(df_pjecalc, txt_valor_custas,1,0)
 
 # CONTRIBUIÇÃO SOCIAL
 
     def var_contribuicao_social():
         global correcao_trabalhista, atividade_economica, data_inicial_inss, data_final_inss, simples_nacional, inicio_nacional, final_nacional
 
-        correcao_trabalhista = src(df_analise_decisoes,txt_correcao_trabalhista ,1,0)
+        correcao_trabalhista = src(df_pjecalc,txt_correcao_trabalhista ,1,0)
 
-        atividade_economica = src(df_analise_geral,txt_atividade_economica ,0,1)
+        atividade_economica = src(df_pjecalc,txt_atividade_economica ,0,1)
 
-        data_inicial_inss = converter_data(src(df_analise_geral,txt_data_inicial_inss ,0,1),'dmy')
+        data_inicial_inss = converter_data(src(df_pjecalc,txt_data_inicial_inss ,0,1),'dmy')
 
-        data_final_inss = converter_data(src(df_analise_geral, txt_data_final_inss,0,1),'dmy')
+        data_final_inss = converter_data(src(df_pjecalc, txt_data_final_inss,0,1),'dmy')
 
-        simples_nacional = src(df_analise_geral, txt_simples_nacional,0,1)
+        simples_nacional = src(df_pjecalc, txt_simples_nacional,0,1)
 
-        inicio_nacional = converter_data(src(df_analise_geral, txt_inicio_nacional,0,1),'my')
+        inicio_nacional = converter_data(src(df_pjecalc, txt_inicio_nacional,0,1),'my')
 
-        final_nacional = converter_data(src(df_analise_geral, txt_final_nacional,0,1),'my')
+        final_nacional = converter_data(src(df_pjecalc, txt_final_nacional,0,1),'my')
 
 # FGTS
 
     def var_fgts():
         global fgts, multa_fgts, multa_467, incidencia_fgts, excluir_base_sobre_aviso
 
-        fgts = src(df_analise_decisoes,txt_fgts ,1,0)
+        fgts = src(df_pjecalc,txt_fgts ,1,0)
 
-        multa_fgts = src(df_analise_decisoes,txt_multa_fgts ,1,0)
+        multa_fgts = src(df_pjecalc,txt_multa_fgts ,1,0)
 
-        multa_467 =src(df_analise_decisoes,txt_multa_467 ,1,0)
+        multa_467 =src(df_pjecalc,txt_multa_467 ,1,0)
 
-        incidencia_fgts = src(df_analise_decisoes,txt_incidencia_fgts ,1,0)
+        incidencia_fgts = src(df_pjecalc,txt_incidencia_fgts ,1,0)
 
         excluir_base_sobre_aviso = txt_excluir_base_sobre_aviso
 
@@ -158,15 +158,15 @@ def calculo():
     def var_honorarios_1_adv_recte():
         global primeiro_adv_recte, vencimento_primeiro_adv_recte, valor_primeiro_adv_recte, tipo_primeiro_adv_recte, vencimento_juros_primeiro_adv_recte
 
-        primeiro_adv_recte = src(df_analise_decisoes,txt_primeiro_adv_recte ,1,0)
+        primeiro_adv_recte = src(df_pjecalc,txt_primeiro_adv_recte ,1,0)
         
-        vencimento_primeiro_adv_recte = converter_data(src(df_analise_geral, txt_vencimento_primeiro_adv_recte,0,1),'dmy')
+        vencimento_primeiro_adv_recte = converter_data(src(df_pjecalc, txt_vencimento_primeiro_adv_recte,0,1),'dmy')
         
-        valor_primeiro_adv_recte = src(df_analise_decisoes,txt_valor_primeiro_adv_recte ,1,1)
+        valor_primeiro_adv_recte = src(df_pjecalc,txt_valor_primeiro_adv_recte ,1,1)
         
         tipo_primeiro_adv_recte = 'INFORMADO' if identificar_tipo(valor_primeiro_adv_recte) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(valor_primeiro_adv_recte) == 'CALCULADO' else tipo_primeiro_adv_recte
         
-        vencimento_juros_primeiro_adv_recte = converter_data(src(df_analise_geral,txt_vencimento_juros_primeiro_adv_recte ,0,1),'dmy')
+        vencimento_juros_primeiro_adv_recte = converter_data(src(df_pjecalc,txt_vencimento_juros_primeiro_adv_recte ,0,1),'dmy')
                
                
 # HONORÁRIOS 1º ADV. RECDA.
@@ -174,75 +174,75 @@ def calculo():
     def var_honorarios_1_adv_recda():   
         global primeira_adv_recda, vencimento_primeira_adv_recda, valor_primeira_adv_recda, exigibilidade_primeira_adv_recda, tipo_primeira_adv_recda, vencimento_juros_primeira_adv_recda
 
-        primeira_adv_recda = src(df_analise_decisoes,txt_primeira_adv_recda ,1,0)
+        primeira_adv_recda = src(df_pjecalc,txt_primeira_adv_recda ,1,0)
 
-        vencimento_primeira_adv_recda = converter_data(src(df_analise_geral, txt_vencimento_primeira_adv_recda,0,1),'dmy')
+        vencimento_primeira_adv_recda = converter_data(src(df_pjecalc, txt_vencimento_primeira_adv_recda,0,1),'dmy')
 
-        valor_primeira_adv_recda = src(df_analise_decisoes,txt_valor_primeira_adv_recda ,1,1)
+        valor_primeira_adv_recda = src(df_pjecalc,txt_valor_primeira_adv_recda ,1,1)
 
-        exigibilidade_primeira_adv_recda = src(df_analise_decisoes,txt_exigibilidade_primeira_adv_recda ,1,2)
+        exigibilidade_primeira_adv_recda = src(df_pjecalc,txt_exigibilidade_primeira_adv_recda ,1,2)
 
         tipo_primeira_adv_recda = 'INFORMADO' if identificar_tipo(valor_primeira_adv_recda) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(valor_primeira_adv_recda) == 'CALCULADO' else tipo_primeira_adv_recda
 
-        vencimento_juros_primeira_adv_recda = converter_data(src(df_analise_geral, txt_vencimento_juros_primeira_adv_recda,0,1),'dmy')
+        vencimento_juros_primeira_adv_recda = converter_data(src(df_pjecalc, txt_vencimento_juros_primeira_adv_recda,0,1),'dmy')
 
 # HONORÁRIOS 2º ADV. RECDA.
         
     def var_honorarios_2_adv_recda():
         global segunda_adv_recda, vencimento_segunda_adv_recda, valor_segunda_adv_recda, exigibilidade_segunda_adv_recda, tipo_segunda_adv_recda, vencimento_juros_segunda_adv_recda
 
-        segunda_adv_recda = src(df_analise_decisoes,txt_segunda_adv_recda ,2,0)
+        segunda_adv_recda = src(df_pjecalc,txt_segunda_adv_recda ,2,0)
 
-        vencimento_segunda_adv_recda = converter_data(src(df_analise_geral, txt_vencimento_segunda_adv_recda,0,1),'dmy')
+        vencimento_segunda_adv_recda = converter_data(src(df_pjecalc, txt_vencimento_segunda_adv_recda,0,1),'dmy')
 
-        valor_segunda_adv_recda = src(df_analise_decisoes,txt_valor_segunda_adv_recda ,2,1)
+        valor_segunda_adv_recda = src(df_pjecalc,txt_valor_segunda_adv_recda ,2,1)
 
-        exigibilidade_segunda_adv_recda = src(df_analise_decisoes,txt_exigibilidade_segunda_adv_recda ,2,2)
+        exigibilidade_segunda_adv_recda = src(df_pjecalc,txt_exigibilidade_segunda_adv_recda ,2,2)
 
         tipo_segunda_adv_recda = 'INFORMADO' if identificar_tipo(valor_segunda_adv_recda) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(valor_segunda_adv_recda) == 'CALCULADO' else tipo_segunda_adv_recda
 
-        vencimento_juros_segunda_adv_recda = converter_data(src(df_analise_geral, txt_vencimento_juros_segunda_adv_recda,0,1),'dmy')
+        vencimento_juros_segunda_adv_recda = converter_data(src(df_pjecalc, txt_vencimento_juros_segunda_adv_recda,0,1),'dmy')
 
 # HONORÁRIOS 3º ADV. RECDA.
         
     def var_honorarios_3_adv_recda():
         global terceira_adv_recda, vencimento_terceira_adv_recda, valor_terceira_adv_recda, exigibilidade_terceira_adv_recda, tipo_terceira_adv_recda, vencimento_juros_terceira_adv_recda
 
-        terceira_adv_recda = src(df_analise_decisoes,txt_terceira_adv_recda ,3,0)
+        terceira_adv_recda = src(df_pjecalc,txt_terceira_adv_recda ,3,0)
 
-        vencimento_terceira_adv_recda = converter_data(src(df_analise_geral, txt_vencimento_terceira_adv_recda,0,1),'dmy')
+        vencimento_terceira_adv_recda = converter_data(src(df_pjecalc, txt_vencimento_terceira_adv_recda,0,1),'dmy')
 
-        valor_terceira_adv_recda = src(df_analise_decisoes,txt_valor_terceira_adv_recda ,3,1)
+        valor_terceira_adv_recda = src(df_pjecalc,txt_valor_terceira_adv_recda ,3,1)
 
-        exigibilidade_terceira_adv_recda = src(df_analise_decisoes,txt_exigibilidade_terceira_adv_recda ,3,2)
+        exigibilidade_terceira_adv_recda = src(df_pjecalc,txt_exigibilidade_terceira_adv_recda ,3,2)
 
         tipo_terceira_adv_recda = 'INFORMADO' if identificar_tipo(valor_terceira_adv_recda) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(valor_terceira_adv_recda) == 'CALCULADO' else tipo_terceira_adv_recda
 
-        vencimento_juros_terceira_adv_recda = converter_data(src(df_analise_geral, txt_vencimento_juros_terceira_adv_recda,0,1),'dmy')
+        vencimento_juros_terceira_adv_recda = converter_data(src(df_pjecalc, txt_vencimento_juros_terceira_adv_recda,0,1),'dmy')
 
 # HONORÁRIOS 4º ADV. RECDA.
         
     def var_honorarios_4_adv_recda():
         global quarta_adv_recda, vencimento_quarta_adv_recda, valor_quarta_adv_recda, exigibilidade_quarta_adv_recda, tipo_quarta_adv_recda, vencimento_juros_quarta_adv_recda
 
-        quarta_adv_recda = src(df_analise_decisoes,txt_quarta_adv_recda ,4,0)
+        quarta_adv_recda = src(df_pjecalc,txt_quarta_adv_recda ,4,0)
 
-        vencimento_quarta_adv_recda =converter_data(src(df_analise_geral, txt_vencimento_quarta_adv_recda,0,1),'dmy')
+        vencimento_quarta_adv_recda =converter_data(src(df_pjecalc, txt_vencimento_quarta_adv_recda,0,1),'dmy')
 
-        valor_quarta_adv_recda = src(df_analise_decisoes,txt_valor_quarta_adv_recda ,4,1)
+        valor_quarta_adv_recda = src(df_pjecalc,txt_valor_quarta_adv_recda ,4,1)
 
-        exigibilidade_quarta_adv_recda = src(df_analise_decisoes,txt_exigibilidade_quarta_adv_recda ,4,2)
+        exigibilidade_quarta_adv_recda = src(df_pjecalc,txt_exigibilidade_quarta_adv_recda ,4,2)
 
         tipo_quarta_adv_recda = 'INFORMADO' if identificar_tipo(vencimento_quarta_adv_recda) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(vencimento_quarta_adv_recda) == 'CALCULADO' else tipo_quarta_adv_recda
 
-        vencimento_juros_quarta_adv_recda =converter_data(src(df_analise_geral, txt_vencimento_juros_quarta_adv_recda,0,1),'dmy')
+        vencimento_juros_quarta_adv_recda =converter_data(src(df_pjecalc, txt_vencimento_juros_quarta_adv_recda,0,1),'dmy')
 
 # HONORÁRIOS PERITO CONTÁBIL
          
     def var_honorarios_perito_contabil():
         global perito_contabil, vencimento_perito_contabil, valor_perito_contabil, tipo_perito_contabil, apurar_honorario_perito
 
-        apurar_honorario_perito = src(df_analise_decisoes,txt_apurar_honorario_perito ,1,0)
+        apurar_honorario_perito = src(df_pjecalc,txt_apurar_honorario_perito ,1,0)
 
         perito_contabil = txt_perito_contabil
 
@@ -257,9 +257,9 @@ def calculo():
     def var_honorarios_engenheiro():
         global vencimento_engenheiro, valor_engenheiro, tipo_engenheiro
 
-        vencimento_engenheiro = converter_data(src(df_analise_decisoes,txt_vencimento_engenheiro ,0,3),'dmy')
+        vencimento_engenheiro = converter_data(src(df_pjecalc,txt_vencimento_engenheiro ,0,3),'dmy')
 
-        valor_engenheiro = src(df_analise_decisoes,txt_valor_engenheiro ,0,1)
+        valor_engenheiro = src(df_pjecalc,txt_valor_engenheiro ,0,1)
 
         tipo_engenheiro = 'INFORMADO' if identificar_tipo(valor_engenheiro) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(valor_engenheiro) == 'CALCULADO' else tipo_engenheiro
 
@@ -268,9 +268,9 @@ def calculo():
     def var_honorarios_medico():
         global vencimento_medico, valor_medico, tipo_medico
 
-        vencimento_medico = converter_data(src(df_analise_decisoes,txt_vencimento_medico ,0,3),'dmy')
+        vencimento_medico = converter_data(src(df_pjecalc,txt_vencimento_medico ,0,3),'dmy')
 
-        valor_medico = src(df_analise_decisoes,txt_valor_medico ,0,1)
+        valor_medico = src(df_pjecalc,txt_valor_medico ,0,1)
 
         tipo_medico = 'INFORMADO' if identificar_tipo(valor_medico) == 'INFORMADO' else 'CALCULADO' if identificar_tipo(valor_medico) == 'CALCULADO' else tipo_medico
 

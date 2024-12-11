@@ -8,6 +8,7 @@ warnings.filterwarnings('ignore', category=UserWarning, module='pandas')
 
 class PjeCalcAutomatizacao(QMainWindow):
 
+
     def __init__(self):
         super().__init__()
 
@@ -216,9 +217,18 @@ class PjeCalcAutomatizacao(QMainWindow):
             time.sleep(1)
 
     def iniciar_pjecalc(self):
-        caminho_arquivo_bat = 'C:/Users/user/Downloads/arquivosPASTAS/pjecalc-windows64-2.12.0/iniciarPjeCalc.bat'
         nome_processo_javaw = 'javaw.exe'
         nome_processo_firefox = 'firefox.exe'
+
+        base_dir = "pjecalc-windows64-2.12.0"
+        file_name = "iniciarPjeCalc.bat"
+        start_path = os.path.expanduser("~/Downloads")
+
+        for root, dirs, files in os.walk(start_path):
+            if base_dir in dirs:
+                # Constrói o caminho completo para o arquivo
+                caminho_arquivo_bat = os.path.join(root, base_dir, file_name)
+                break
 
         # Obtenha a referência às checkboxes
         checkbox2_4 = self.checkbox2_4

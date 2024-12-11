@@ -7,34 +7,34 @@ warnings.filterwarnings('ignore', category=UserWarning, module='pandas')
 
 def calculoExterno():
 
-    df_analise_geral, df_analise_decisoes, _ = iniciar_planilhas()
+    df_pjecalc, _ = iniciar_planilhas()
         
 # DADOS DO PROCESSO
 
     def varDadosProcessoCalcExt():
         global sequencia, digito, ano, tribunal, vara, recte, cpf, adv_recte, recda, cnpj, adv_recda,engenheiro,medico
 
-        sequencia = src(df_analise_geral,txt_sequencia,0,1)[0:7]
+        sequencia = src(df_pjecalc,txt_sequencia,0,1)[0:7]
 
-        digito = src(df_analise_geral,txt_digito,0,1)[8:10]
+        digito = src(df_pjecalc,txt_digito,0,1)[8:10]
 
-        ano = src(df_analise_geral,txt_ano,0,1)[11:15]
+        ano = src(df_pjecalc,txt_ano,0,1)[11:15]
 
-        tribunal = src(df_analise_geral,txt_tribunal,0,1)[18:20]
+        tribunal = src(df_pjecalc,txt_tribunal,0,1)[18:20]
 
-        vara =src(df_analise_geral,txt_vara,0,1)[21:25]
+        vara =src(df_pjecalc,txt_vara,0,1)[21:25]
 
-        recte = src(df_analise_geral,txt_recte,0,1)
+        recte = src(df_pjecalc,txt_recte,0,1)
 
-        cpf = src(df_analise_geral,txt_cpf,0,3)
+        cpf = src(df_pjecalc,txt_cpf,0,3)
 
-        adv_recte = src(df_analise_geral,txt_adv_recte,0,1)
+        adv_recte = src(df_pjecalc,txt_adv_recte,0,1)
 
-        recda = src(df_analise_geral,txt_recda,1,1)
+        recda = src(df_pjecalc,txt_recda,1,1)
 
-        cnpj = src(df_analise_geral,txt_cnpj,1,3)
+        cnpj = src(df_pjecalc,txt_cnpj,1,3)
 
-        adv_recda = src(df_analise_geral,txt_adv_recda,1,1)
+        adv_recda = src(df_pjecalc,txt_adv_recda,1,1)
 
 # PARÂMETROS DO CÁLCULO
         
@@ -43,26 +43,26 @@ def calculoExterno():
 
         ultima_atualizacao = converter_data(primeiro_dia_mes(),'dmy')
         
-        ultima_remuneracao = src(df_analise_decisoes,txt_ultima_remuneracao,0,1)
+        ultima_remuneracao = src(df_pjecalc,txt_ultima_remuneracao,0,1)
 
-        indice_trabalhista = src(df_analise_decisoes,txt_indice_trabalhista ,0,1)
+        indice_trabalhista = src(df_pjecalc,txt_indice_trabalhista ,0,1)
         
-        segundo_indice_trabalhista = src(df_analise_decisoes, txt_segundo_indice_trabalhista,0,4)
+        segundo_indice_trabalhista = src(df_pjecalc, txt_segundo_indice_trabalhista,0,4)
 
-        tabela_juros = src(df_analise_decisoes,txt_tabela_juros ,0,1)
+        tabela_juros = src(df_pjecalc,txt_tabela_juros ,0,1)
         
-        segunda_tabela_juros = src(df_analise_decisoes, txt_segunda_tabela_juros,0,4)
+        segunda_tabela_juros = src(df_pjecalc, txt_segunda_tabela_juros,0,4)
 
-        base_juros = src(df_analise_decisoes, txt_base_juros,1,0) 
+        base_juros = src(df_pjecalc, txt_base_juros,1,0) 
         base_juros = '0' if base_juros == 'Verbas' else ('1' if base_juros == 'Verba (-) Contribuição Social' else None)
 
-        fgts = src(df_analise_decisoes,txt_fgts ,1,0)
+        fgts = src(df_pjecalc,txt_fgts ,1,0)
 
-        inss = src(df_analise_decisoes, txt_inss,1,0)
+        inss = src(df_pjecalc, txt_inss,1,0)
         
         taxa_negativa = txt_taxa_negativa
 
-        custas = src(df_analise_decisoes, txt_custas,1,0)
+        custas = src(df_pjecalc, txt_custas,1,0)
 
         index_base_custas = txt_index_base_custas
 
