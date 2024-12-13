@@ -220,38 +220,74 @@ class PjeCalcAutomatizacao(QMainWindow):
         nome_processo_javaw = 'javaw.exe'
         nome_processo_firefox = 'firefox.exe'
 
+        # Verifica ou obtém o caminho do app_path no config.json
+        config_path = 'json/config.json'
+        app_path = None
+
+        def buscarDirPje():
+            """Solicita ao usuário selecionar o caminho do aplicativo."""
+            self.avisos.setText('Configuração inválida. Por favor, selecione o caminho do aplicativo.')
+            dialog = QFileDialog()
+            dialog.setFileMode(QFileDialog.ExistingFile)
+            dialog.setNameFilter("Executáveis (*.exe);;Todos os arquivos (*)")
+
+            if dialog.exec_():
+                selected_file = dialog.selectedFiles()[0]
+                return selected_file
+            return None
+
+        # Tenta carregar o caminho do config.json
+        try:
+            with open(config_path, 'r') as config_file:
+                config = json.load(config_file)
+                app_path = config.get('app_path')
+                if not app_path or not os.path.exists(app_path):
+                    raise ValueError("Caminho do app_path inválido ou não configurado.")
+        except (FileNotFoundError, ValueError, json.JSONDecodeError):
+            app_path = buscarDirPje()
+            if app_path:
+                with open(config_path, 'w') as config_file:
+                    json.dump({'app_path': app_path}, config_file, indent=4)
+
+        if not app_path:
+            self.avisos.setText('Erro: Caminho do aplicativo não configurado.')
+            return
+
         base_dir = "pjecalc-windows64-2.12.0"
         file_name = "iniciarPjeCalc.bat"
         start_path = os.path.expanduser("~/Downloads")
 
+        caminho_arquivo_bat = None
         for root, dirs, files in os.walk(start_path):
             if base_dir in dirs:
-                # Constrói o caminho completo para o arquivo
-                caminho_arquivo_bat = os.path.join(root, base_dir, file_name)
-                break
+                potential_path = os.path.join(root, base_dir, file_name)
+                if os.path.exists(potential_path):
+                    caminho_arquivo_bat = potential_path
+                    break
 
-        # Obtenha a referência às checkboxes
+        if not caminho_arquivo_bat:
+            self.avisos.setText('Erro: Não foi possível localizar o arquivo iniciarPjeCalc.bat no caminho configurado.')
+            return
+
+        # Verificar estado das checkboxes
         checkbox2_4 = self.checkbox2_4
         checkbox2_3 = self.checkbox2_3
-        
-        # Verificar se o PjeCalc já está ativo com base no estado das checkboxes
+
         if checkbox2_4.isChecked() or checkbox2_3.isChecked():
-            pass  # Não é necessário iniciar novamente
+            self.avisos.setText('Pje-Calc já está ativo.')
+            return
         else:
             self.avisos.clear()
             self.avisos.setText('Iniciando Pje-Calc')  
-            
+
             # Iniciar o processo do PjeCalc
             subprocess.Popen(caminho_arquivo_bat, shell=True)
 
-            # Aguardar o início dos processos javaw.exe e firefox.exe
+            # Aguardar o início dos processos
             self.aguardar_inicio_programa(nome_processo_javaw)
             self.aguardar_inicio_programa(nome_processo_firefox)
 
-            # Marcar a checkbox2_4 após iniciar o Pje-Calc
             checkbox2_4.setChecked(True)
-
-            # Encerrar o processo firefox.exe se necessário
             self.encerrar_processo(nome_processo_firefox)
 
         # Manipulação de checkboxes e arquivo JSON
@@ -259,22 +295,22 @@ class PjeCalcAutomatizacao(QMainWindow):
             with open('json/escolha_calculos.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
+            self.avisos.setText('Arquivo escolha_calculos.json não encontrado. Um novo será criado.')
             data = {}
+        except json.JSONDecodeError:
+            self.avisos.setText('Erro ao ler o arquivo JSON. Verifique a estrutura.')
+            return
 
-        # Atualizar o caminho do arquivo no JSON
+        # Atualizar dados no JSON
         if hasattr(self, 'file_path') and self.file_path:
             data['caminho_arquivo'] = self.file_path
 
-        # Atualizar os valores das checkboxes no JSON
         checkbox_status = {checkbox.text(): checkbox.isChecked() for checkbox in self.checkboxes}
-        
-        for checkbox, value in checkbox_status.items():
-            data[checkbox] = value
+        data.update(checkbox_status)
 
-        # SALVAR OS DADOS
         with open('json/escolha_calculos.json', 'w') as file:
             json.dump(data, file, indent=4)
-    
+
         # Chamar cálculo
         self.chamar_calculo()
 

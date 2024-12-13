@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\json",
     "\\python",
-    "\\txt"
+    "\\xlsm"
   ],
-  "SelectedNode": "\\json\\escolha_calculos.json",
+  "SelectedNode": "\\python\\teste.py",
   "PreviewInSolutionExplorer": false
 }
